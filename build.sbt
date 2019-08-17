@@ -2,6 +2,7 @@ val catsVersion = "2.0.0"
 val catsEffectVersion = "2.0.0"
 val utilVersion = "20.6.0"
 val finagleVersion = "20.6.0"
+val fs2Version = "2.4.2"
 
 organization in ThisBuild := "io.catbird"
 
@@ -110,6 +111,14 @@ lazy val finagle = project
     }
   )
   .dependsOn(util)
+
+lazy val fs2 = project
+  .settings(moduleName := "catbird-fs")
+  .settings(allSettings)
+  .settings(
+    libraryDependencies += "co.fs2" %% "fs2-core" % fs2Version,
+  )
+  .dependsOn(util, effect)
 
 lazy val benchmark = project
   .settings(moduleName := "catbird-benchmark")
